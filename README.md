@@ -1,4 +1,4 @@
-# expenses
+# Message Management Web API
 
 ## Project setup
 ```
