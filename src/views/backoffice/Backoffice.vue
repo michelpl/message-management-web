@@ -10,5 +10,17 @@
 </template>
 
 <script>
-
+export default {
+  name: 'Backoffice',
+  data: () => ({
+    email: '',
+    password: '',
+    loading: false
+  }),
+  mounted () {
+    console.log('PASSOUR NO MOUNTED DO BO')
+  },
+  methods: {
+  }
+}
 </script>

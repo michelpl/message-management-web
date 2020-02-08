@@ -69,9 +69,9 @@ export default {
         console.log(res.user)
         window.uid = res.user.uid
 
-        localStorage.setItem('mm_token', window.uid)
+        localStorage.setItem('mm_token', 'TOKEN')
 
-        await this.$router.push({ name: 'home' })
+        await this.$router.push({ name: 'backoffice' })
       } catch (err) {
         let message = ''
         switch (err.code) {
@@ -91,13 +91,6 @@ export default {
       }
       this.loading = false
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      if (window.uid) {
-        vm.$router.push({ name: 'home' })
-      }
-    })
   }
 }
 </script>

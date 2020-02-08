@@ -30,13 +30,19 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} - Expenses`
+  document.title = `${to.meta.title} - Message Management`
+  console.log('TOKEN: ' + localStorage.getItem('mm_token'))
 
-  if (!window.uid && to.name !== 'login' && to.name !== 'backoffice') {
+  if (localStorage.getItem('mm_token') === null && to.name === 'backoffice') {
     next({ name: 'login' })
   } else {
     next()
   }
+  /* if (!window.uid && to.name !== 'login' && to.name !== 'backoffice') {
+    next({ name: 'login' })
+  } else {
+    next()
+  } */
 })
 
 export default router
