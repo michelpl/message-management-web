@@ -1,4 +1,4 @@
-# Message Management Web API
+# Message Management Web
 
 ## Project setup
 ```
