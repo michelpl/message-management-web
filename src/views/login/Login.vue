@@ -69,7 +69,7 @@ export default {
         console.log(res.user)
         window.uid = res.user.uid
 
-        // localStorage.setItem('mm_token', window.uid)
+        localStorage.setItem('mm_token', window.uid)
 
         await this.$router.push({ name: 'home' })
       } catch (err) {

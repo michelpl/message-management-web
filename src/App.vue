@@ -1,19 +1,13 @@
 <template>
   <div id="app">
     <base-spinner/>
-
-    <div class="container-fluid" v-if="isLogged">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-2 navigation-sidebar">
-          <h1 class="app-title">Expenses</h1>
-        </div>
         <div class="col">
           <router-view/>
         </div>
       </div>
     </div>
-
-    <router-view v-else/>
   </div>
 </template>
 
@@ -25,18 +19,8 @@ export default {
   components: {
     BaseSpinner
   },
-  data: () => ({ isLogged: false }),
   mounted () {
     this.$root.$emit('Spinner::hide')
-
-    this.$firebase.auth().onAuthStateChanged(user => {
-      window.uid = user ? user.uid : null
-      this.isLogged = !!user
-      this.$router.push({ name: window.uid ? 'home' : 'login' })
-      setTimeout(() => {
-        this.$root.$emit('Spinner::hide')
-      }, 300)
-    })
   }
 }
 </script>
