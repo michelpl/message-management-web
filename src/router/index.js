@@ -1,29 +1,36 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+// eslint-disable-next-line no-undef
+const router = new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      meta: {
+        icon: 'home', title: 'Home'
+      },
+      component: () => import(/* webpackChunkName: "home" */ '../views/Home')
+    },
+    {
+      name: 'login',
+      path: '/login',
+      meta: { title: 'Login' },
+      component: () => import(/* webpackChunkName: "login" */ '../views/login/Login')
+    }
+  ]
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} - Expenses`
+
+  if (!window.uid && to.name !== 'login') {
+    next({ name: 'login' })
+  } else {
+    next()
   }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
 })
 
 export default router

@@ -1,6 +1,15 @@
-$dark: #000;
-$darker: #111;
-$dark-medium: #333;
+$dark: #000!important;
+$darker: #111!important;
+$dark-medium: #333!important;
+$featured: #ff4c00!important;
+$featured-dark: #ff2700 !important;
+$light: #cfcfcf!important;
 
-$featured: #ff4c00;
-$featured-dark: #af3800;
+:root {
+  --dark: #{$dark};
+  --darker: #{$darker};
+  --dark-medium: #{$dark-medium};
+  --featured: #{$featured};
+  --featured-dark: #{$featured-dark};
+  --light: #{$light};
+}
