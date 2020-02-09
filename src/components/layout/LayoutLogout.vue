@@ -1,7 +1,7 @@
 <template>
-  <button class="btn btn-logout" @click="logout()">
+  <button class="btn btn-sm btn-outline-secondary" @click="logout()">
     <i class="fa fa-power-off"></i>
-    Sair
+    Sign out
   </button>
 </template>
 

@@ -5,6 +5,7 @@
 
 * {
   font-family: 'Poppins', sans-serif;
+  color: var(--dark);
 }
 
 .btn-primary {
@@ -15,6 +16,24 @@
   }
 }
 
+.btn-outline-secondary {
+  color: var(--light)!important;
+  &:hover {
+    color: var(--lighter)!important;
+    background-color: transparent!important;
+    border-color: var(--lighter)!important;
+  }
+}
+
+.btn-outline-secondary i {
+  color: var(--light)!important;
+  &:hover {
+    color: var(--lighter)!important;
+    background-color: transparent!important;
+  }
+}
+
+
 .btn-outline-primary {
   border-color: var(--featured) !important;
   color: var(--featured) !important;
@@ -22,5 +41,12 @@
   &:hover {
     color: var(--darker) !important;
     background-color: var(--featured) !important;
+  }
+}
+
+a, .active {
+  color: var(--dark)!important;
+  &:hover {
+    color: var(--darker)!important;
   }
 }

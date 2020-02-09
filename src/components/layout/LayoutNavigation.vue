@@ -1,31 +1,26 @@
 <template>
-  <nav class="nav flex-column justify-content-between">
-    <div>
-      <router-link
-        exact
-        :key="i"
-        class="nav-link"
-        exact-active-class="active"
-        :to="{ name: router.name }"
-        v-for="(router, i) in routerLinks"
-      >
-        <i class="fa" :class="`fa-${router.meta.icon}`"></i>
-        {{ router.meta.title }}
-      </router-link>
-
-      <hr>
-
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <router-link
+          exact
+          :key="i"
+          class="nav-link"
+          exact-active-class="active"
+          :to="{ name: router.name }"
+          v-for="(router, i) in routerLinks"
+        >
+          <i class="fa" :class="`fa-${router.meta.icon}`"></i>
+          {{ router.meta.title }}
+        </router-link>
+      </ul>
     </div>
-
-    <layout-logout/>
   </nav>
 </template>
 
 <script>
-import LayoutLogout from './LayoutLogout'
 export default {
   components: {
-    LayoutLogout
   },
   computed: {
     routerLinks () {
@@ -50,7 +45,7 @@ export default {
         background-color: transparent;
       }
       &:hover {
-        color: var(--dark);
+        color: var(--light);
         background-color: var(--featured);
       }
     }

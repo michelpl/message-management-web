@@ -23,7 +23,13 @@ const router = new Router({
     {
       name: 'backoffice',
       path: '/backoffice',
-      meta: { title: 'Backoffice' },
+      meta: { title: 'Home' },
+      component: () => import(/* webpackChunkName: "backoffice" */ '../views/backoffice/Backoffice')
+    },
+    {
+      name: 'message-list',
+      path: '/message-list',
+      meta: { title: 'Announcements List' },
       component: () => import(/* webpackChunkName: "backoffice" */ '../views/backoffice/Backoffice')
     }
   ]

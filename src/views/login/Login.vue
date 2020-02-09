@@ -33,6 +33,8 @@
             <i class="fa fa-sign-in-alt"></i>
           </template>
         </button>
+        <p></p>
+        <router-link to="/"><i class="fas fa-long-arrow-alt-left"></i> Back</router-link>
       </div>
     </div>
   </form>
