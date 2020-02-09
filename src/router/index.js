@@ -31,8 +31,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} - Message Management`
-  console.log('TOKEN: ' + localStorage.getItem('mm_token'))
-
   if (localStorage.getItem('mm_token') === null && to.name === 'backoffice') {
     next({ name: 'login' })
   } else {

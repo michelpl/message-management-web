@@ -21,7 +21,7 @@ export default {
     loading: false
   }),
   mounted () {
-    console.log('PASSOUR NO MOUNTED DO BO')
+    console.log()
   },
   methods: {
   }

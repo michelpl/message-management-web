@@ -20,7 +20,6 @@ export default {
     BaseSpinner
   },
   mounted () {
-    console.log('PASSOU NO MOUNTED DO APP.vue')
     this.$root.$emit('Spinner::hide')
   }
 }

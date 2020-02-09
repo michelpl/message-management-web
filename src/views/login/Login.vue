@@ -57,37 +57,21 @@ export default {
       this.loading = true
       const { email, password } = this
       try {
-        // const res = await this.$firebase.auth().signInWithEmailAndPassword(email, password)
-
-        const res = {
-          user: {
-            'uid': 1,
-            'email': email,
+        this.$root.$emit('Spinner::show')
+        this.$http.post(
+          'http://desafio.localhost/api/V1/login',
+          {
+            'user': email,
             'password': password
           }
-        }
-        console.log(res.user)
-        window.uid = res.user.uid
-
-        localStorage.setItem('mm_token', 'TOKEN')
-
-        await this.$router.push({ name: 'backoffice' })
-      } catch (err) {
-        let message = ''
-        switch (err.code) {
-          case 'auth/user-not-found':
-            message = 'User not found.'
-            break
-          case 'auth/wrong-password':
-            message = 'Invalid password'
-            break
-          default:
-            message = 'Wrong user or password. Please, try again'
-        }
-        this.$root.$emit('Notification::show', {
-          message,
-          type: 'danger'
+        ).then(function (data) {
+          localStorage.setItem('mm_token', data.data.success.token)
+          this.$router.push({ name: 'backoffice' })
+          this.$root.$emit('Spinner::hide')
         })
+      } catch (err) {
+        console.log(err.status)
+        this.$root.$emit('Spinner::hide')
       }
       this.loading = false
     }
