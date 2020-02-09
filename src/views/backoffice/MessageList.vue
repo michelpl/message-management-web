@@ -15,22 +15,35 @@
               <thead>
               <tr>
                 <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
+                <th>Start date</th>
+                <th>Expiration date</th>
+                <th>Subject</th>
+                <th>Actions</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
+              <tr v-for="message in messageList" :key="message.id">
+                <td>{{ message.id }}</td>
+                <td>{{ message.start_date }}</td>
+                <td>{{ message.expiration_date }}</td>
+                <td>{{ message.subject }}</td>
+                <td>
+                  <router-link to="/home">View</router-link>
+                  <router-link to="/">Edit</router-link>
+                  <router-link to="/">Delete</router-link>
+                </td>
               </tr>
               </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
           </div>
         </main>
       </div>
@@ -39,8 +52,36 @@
 </template>
 
 <script>
+import LayoutNavigation from '../../components/layout/LayoutNavigation'
+import LayoutNavbar from '../../components/layout/LayoutNavbar'
 export default {
-  name: 'MessageList'
+  name: 'AnnouncementList',
+  components: { LayoutNavbar, LayoutNavigation },
+  data () {
+    return {
+      messageList: [],
+      loading: false
+    }
+  },
+  mounted () {
+    this.$root.$emit('Spinner::hide')
+    try {
+      let token = localStorage.getItem('mm_token')
+      const auth = 'Bearer ' + token
+
+      this.$http.get('http://desafio.localhost/api/V1/message', {
+        headers: {
+          Authorization: auth
+        }
+      }).then(function (data) {
+        this.messageList = data.body.data
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

@@ -27,10 +27,16 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "backoffice" */ '../views/backoffice/Backoffice')
     },
     {
-      name: 'message-list',
-      path: '/message-list',
+      name: 'announcement-list',
+      path: '/announcement-list',
       meta: { title: 'Announcements List' },
-      component: () => import(/* webpackChunkName: "backoffice" */ '../views/backoffice/Backoffice')
+      component: () => import(/* webpackChunkName: "messagelist" */ '../views/backoffice/MessageList')
+    },
+    {
+      name: 'announcement-create',
+      path: '/announcement-create',
+      meta: { title: 'Create announcement' },
+      component: () => import(/* webpackChunkName: "announcementcreate" */ '../views/backoffice/MessageCreate')
     }
   ]
 })
