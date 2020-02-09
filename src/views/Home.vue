@@ -30,9 +30,9 @@
 
     <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
       <div class="col-md-6 px-0">
-        <h1 class="display-4 font-italic">Message Management System</h1>
-        <p class="lead my-3">Click on <router-link to="/login">Sign in</router-link> button to login</p>
-        <p class="lead my-3">This is a sample page and everything here is for example propouses</p>
+        <h1 class="display-4 font-italic text-white">Announcement Management System</h1>
+        <p class="lead my-3 text-white">Click on <router-link to="/login" class="text-white">Sign in</router-link> button to login</p>
+        <p class="lead my-3 text-white">This is a sample page and everything here is for example propouses</p>
       </div>
     </div>
 
@@ -41,8 +41,8 @@
         <div class="card mb-4 box-shadow">
           <br>
           <img class="card-img-top" src="@/assets/github.png" data-holder-rendered="true">
-          <div class="card-body">
-            <p class="card-text">See this project Github and how set up the development environment</p>
+          <div class="card-body text-black-50">
+            <p class="card-text">See this project's Github and how set up the development environment</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <a href="https://github.com/michelpl/message-management-docker" class="btn btn-sm btn-outline-secondary" target="_blank">View</a>
@@ -64,5 +64,11 @@
 .navbar {
   background-color: var(--light);
   color: var(--darker);
+}
+a, a:hover {
+  color: var(--darker)!important;
+}
+.btn, .btn:hover {
+  border-color: var(--darker)
 }
 </style>

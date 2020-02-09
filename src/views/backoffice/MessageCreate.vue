@@ -20,28 +20,7 @@
             </div>
             <div class="card col-9">
               <div class="card-body">
-                <form @submit.prevent="createAnnouncement()">
-                  <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" maxlength="255" required v-model="subject">
-                    {{subject}}
-                  </div>
-                  <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea class="form-control" id="content" rows="3" maxlength="500" required v-model="content"></textarea>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label for="startdate">Start date</label>
-                      <input type="date" class="form-control" id="startdate" placeholder="Start date" required v-model="startdate">
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="expirationdate">Expiration date</label>
-                      <input type="date" class="form-control" id="expirationdate" placeholder="Expiration date" required v-model="expirationdate">
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <layout-form></layout-form>
               </div>
             </div>
           </div>
@@ -55,65 +34,23 @@
 import LayoutNavigation from '../../components/layout/LayoutNavigation'
 import LayoutNavbar from '../../components/layout/LayoutNavbar'
 import Alert from '../../components/gLobal/Alert'
+import LayoutForm from '../../components/layout/LayoutForm'
 
 export default {
   name: 'AnnouncementCreate',
   components: {
     LayoutNavbar,
     LayoutNavigation,
-    Alert
+    Alert,
+    LayoutForm
   },
   data () {
     return {
-      loading: false,
-      subject: '',
-      content: '',
-      startdate: '',
-      expirationdate: ''
+      loading: false
     }
   },
   mounted () {
     this.$root.$emit('Spinner::hide')
-  },
-  methods: {
-    createAnnouncement: function () {
-      const {
-        subject,
-        content,
-        startdate,
-        expirationdate
-      } = this
-
-      try {
-        let token = localStorage.getItem('mm_token')
-        const auth = 'Bearer ' + token
-
-        this.$http.post(
-          'http://desafio.localhost/api/V1/message',
-          {
-            'subject': subject,
-            'content': content,
-            'start_date': startdate,
-            'expiration_date': expirationdate,
-            'status': 'ACTIVE',
-            'user_id': 3
-          }, {
-            headers: {
-              Authorization: auth
-            }
-          }
-        ).then(function (data) {
-          this.subject = ''
-          this.content = ''
-          this.startdate = ''
-          this.expirationdate = ''
-
-          this.$root.$emit('Alert::show', 'Announcement created!')
-        })
-      } catch (err) {
-        console.log(err)
-      }
-    }
   }
 }
 </script>

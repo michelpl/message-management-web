@@ -37,11 +37,11 @@
             </table>
             <nav aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" @click.prevent="loadPreviousPage()">Previous</a></li>
+                <span v-for="page in pagination" :key="page">
+                  <li class="page-item"><a class="page-link" @click.prevent="reload(page)"> {{ page }}</a></li>
+                </span>
+                <li class="page-item"><a class="page-link" @click.prevent="loadNextPage()">Next</a></li>
               </ul>
             </nav>
           </div>
@@ -60,31 +60,64 @@ export default {
   data () {
     return {
       messageList: [],
-      loading: false
+      loading: false,
+      nextPage: '',
+      previousPage: '',
+      pageCount: 0,
+      pagination: 1
     }
   },
   mounted () {
-    this.$root.$emit('Spinner::hide')
-    try {
-      let token = localStorage.getItem('mm_token')
-      const auth = 'Bearer ' + token
-
-      this.$http.get('http://desafio.localhost/api/V1/message', {
-        headers: {
-          Authorization: auth
-        }
-      }).then(function (data) {
-        this.messageList = data.body.data
-      })
-    } catch (err) {
-      console.log(err)
-    }
+    this.loadPage('http://desafio.localhost/api/V1/message')
   },
   methods: {
+    reload (pageId) {
+      if (pageId) {
+        let page = 'http://desafio.localhost/api/V1/message?page=' + pageId
+        this.loadPage(page)
+      }
+    },
+    loadPreviousPage () {
+      let page = this.previousPage
+      if (page) {
+        this.loadPage(page)
+      }
+    },
+    loadNextPage () {
+      let page = this.nextPage
+      if (page) {
+        this.loadPage(page)
+      }
+    },
+    loadPage (page) {
+      try {
+        let token = localStorage.getItem('mm_token')
+        const auth = 'Bearer ' + token
+        this.$http.get(page, {
+          headers: {
+            Authorization: auth
+          }
+        }).then(function (data) {
+          this.messageList = data.body.data
+          this.nextPage = data.body.next_page_url
+          this.previousPage = data.body.prev_page_url
+          this.pageCount = data.body.last_page
+          this.pagination = this.pageCount
+
+          if (this.pageCount > 20) {
+            this.pagination = 20
+          }
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.pagination li {
+  cursor: pointer;
+}
 </style>
