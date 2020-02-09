@@ -29,7 +29,7 @@ export default {
   #app {
     min-height: 100vh;
     color: var(--light);
-    background-color: var(--darker);
+    background-color: var(--light);
     .navigation-sidebar {
       background-color: var(--dark-medium);
       .app-title {

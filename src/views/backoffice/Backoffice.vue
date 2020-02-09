@@ -1,23 +1,27 @@
 <template>
-  <div class="row">
-    <div class="col-2 navigation-sidebar">
-      <h1 class="app-title">Backoffice</h1>
-      <layout-navigation></layout-navigation>
+  <div>A</div>
+  <!-- <div>
+    <div class="row">
+      <div class="col-2 navigation-sidebar">
+        <layout-navigation></layout-navigation>
+      </div>
     </div>
-    <div class="col-6 home-box">
-      <h1>Backoffice</h1>
-      <ul>
-        <li v-for="message in messageList" :key="message.id">{{ message.subject }}</li>
-      </ul>
+    <div class="row">
+      <div class="col-6 home-box">
+        <h1 class="app-title">Announcements Management</h1>
+        <ul>
+          <li v-for="message in messageList" :key="message.id">{{ message.subject }}</li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import LayoutNavigation from '../../components/layout/LayoutNavigation'
+// import LayoutNavigation from '../../components/layout/LayoutNavigation'
 export default {
   name: 'Backoffice',
-  components: { LayoutNavigation },
+  // components: { LayoutNavigation },
   data () {
     return {
       messageList: [],
