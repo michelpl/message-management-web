@@ -30,7 +30,6 @@ export default {
       this.$root.$emit('Modal::show', modalArgs)
     },
     delete: function (messageId) {
-      console.log('entrou')
       try {
         let token = localStorage.getItem('mm_token')
         const auth = 'Bearer ' + token
