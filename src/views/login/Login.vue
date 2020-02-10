@@ -76,7 +76,7 @@ export default {
           this.$root.$emit('Spinner::hide')
         })
       } catch (err) {
-        console.log(err.status)
+        // console.log(err.status)
         this.$root.$emit('Spinner::hide')
       }
       this.loading = false

@@ -116,7 +116,7 @@ export default {
         })
       } catch (err) {
         this.$root.$emit('Alert::show', 'Error')
-        console.log(err)
+        // console.log(err)
       }
       this.$root.$emit('Alert::show', "Can't create user")
       this.loading = false

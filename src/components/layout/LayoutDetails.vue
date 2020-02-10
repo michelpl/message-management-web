@@ -73,7 +73,7 @@ export default {
           this.updatedAt = formattedDate
         })
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     },
     formatDate (date) {

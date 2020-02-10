@@ -73,7 +73,7 @@ export default {
           this.loading = false
         })
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     },
     submitMessage: function () {
@@ -142,7 +142,7 @@ export default {
           })
         }
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
   }
