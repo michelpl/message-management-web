@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Announcements</h2>
-    <div class="table-responsive">
+    <div class="table-responsive" v-if="itemsCount > 0">
       <table class="table table-striped table-sm">
         <thead>
         <tr>
@@ -32,6 +32,9 @@
         </ul>
       </nav>
     </div>
+    <div v-else>
+      <h5>No deleted announcements</h5>
+    </div>
   </div>
 </template>
 
@@ -45,7 +48,8 @@ export default {
       nextPage: '',
       previousPage: '',
       pageCount: 0,
-      pagination: 1
+      pagination: 1,
+      itemsCount: 0
     }
   },
   mounted () {
@@ -81,10 +85,8 @@ export default {
             Authorization: auth
           }
         }).then(function (data) {
-          let messageList = data.body.data
-          messageList = this.filter(messageList)
-          this.messageList = messageList
-
+          this.itemsCount = data.body.data.length
+          this.messageList = this.filter(data.body.data)
           this.nextPage = data.body.next_page_url
           this.previousPage = data.body.prev_page_url
           this.pageCount = data.body.last_page
@@ -112,7 +114,7 @@ export default {
     },
     formatDate (date) {
       let newDate = new Date(date)
-      return newDate.getDate() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear()
+      return newDate.getDate() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear() + ' ' + newDate.getHours() + 'h:' + newDate.getMinutes() + ':' + newDate.getSeconds()
     }
   }
 }

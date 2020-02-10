@@ -3,7 +3,7 @@
     <alert></alert>
     <modal></modal>
     <h2>Announcements</h2>
-    <div class="table-responsive">
+    <div class="table-responsive" v-if="itemsCount > 0">
       <table class="table table-striped table-sm">
         <thead>
         <tr>
@@ -38,6 +38,9 @@
         </ul>
       </nav>
     </div>
+    <div v-else>
+      <h5>No announcements</h5>
+    </div>
   </div>
 </template>
 
@@ -58,7 +61,8 @@ export default {
       nextPage: '',
       previousPage: '',
       pageCount: 0,
-      pagination: 1
+      pagination: 1,
+      itemsCount: 0
     }
   },
   mounted () {
@@ -94,6 +98,7 @@ export default {
             Authorization: auth
           }
         }).then(function (data) {
+          this.itemsCount = data.body.data.length
           this.messageList = this.filter(data.body.data)
           this.nextPage = data.body.next_page_url
           this.previousPage = data.body.prev_page_url
