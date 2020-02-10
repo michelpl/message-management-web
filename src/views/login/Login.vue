@@ -71,6 +71,8 @@ export default {
           }
         ).then(function (data) {
           localStorage.setItem('mm_token', data.data.success.token)
+          localStorage.setItem('mm_user_id', data.data.success.user_id)
+          console.log(data.data)
           this.$router.push({ name: 'backoffice' })
           this.$root.$emit('Spinner::hide')
         })

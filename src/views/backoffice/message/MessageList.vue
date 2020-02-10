@@ -68,12 +68,14 @@ export default {
     }
   },
   mounted () {
-    this.loadPage('http://desafio.localhost/api/V1/message')
+    let userId = localStorage.getItem('mm_user_id')
+    this.loadPage('http://desafio.localhost/api/V1/message/user/' + userId)
   },
   methods: {
     reload (pageId) {
       if (pageId) {
-        let page = 'http://desafio.localhost/api/V1/message?page=' + pageId
+        let userId = localStorage.getItem('mm_user_id')
+        let page = 'http://desafio.localhost/api/V1/message/user/' + userId + '?page=' + pageId
         this.loadPage(page)
       }
     },

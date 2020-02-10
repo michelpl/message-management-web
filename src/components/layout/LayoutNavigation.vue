@@ -25,7 +25,7 @@ export default {
   computed: {
     routerLinks () {
       return this.$router.options.routes.filter(
-        r => r.name !== 'login' && r.name !== 'home' && r.name !== 'announcement-edit'
+        r => r.name !== 'login' && r.name !== 'home' && r.name !== 'announcement-edit' && r.name !== 'register'
       )
     }
   }

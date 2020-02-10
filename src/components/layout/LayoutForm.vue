@@ -91,33 +91,58 @@ export default {
         this.loading = true
 
         let token = localStorage.getItem('mm_token')
+        let userId = localStorage.getItem('mm_user_id')
         let messageId = this.messageId ? this.messageId : ''
         const auth = 'Bearer ' + token
 
-        this.$http.put(
-          'http://desafio.localhost/api/V1/message/' + messageId,
-          {
-            'subject': subject,
-            'content': content,
-            'start_date': startdate,
-            'expiration_date': expirationdate,
-            'status': status,
-            'user_id': 3
-          }, {
-            headers: {
-              Authorization: auth
+        let url = 'http://desafio.localhost/api/V1/message/' + messageId
+        let data = {
+          'subject': subject,
+          'content': content,
+          'start_date': startdate,
+          'expiration_date': expirationdate,
+          'status': status,
+          'user_id': userId
+        }
+
+        if (messageId) {
+          this.$http.put(
+            url,
+            data, {
+              headers: {
+                Authorization: auth
+              }
             }
-          }
-        ).then(function (data) {
-          this.$root.$emit('Alert::show', 'Announcement updated!')
+          ).then(function (data) {
+            this.$root.$emit('Alert::show', 'Announcement created!')
 
-          let parent = this
+            let parent = this
 
-          setTimeout(function () {
-            parent.$root.$emit('Alert::hide', '')
-            parent.loading = false
-          }, 3000)
-        })
+            setTimeout(function () {
+              parent.$root.$emit('Alert::hide', '')
+              parent.loading = false
+            }, 3000)
+          })
+        } else {
+          console.log('aqui')
+          this.$http.post(
+            url,
+            data, {
+              headers: {
+                Authorization: auth
+              }
+            }
+          ).then(function (data) {
+            this.$root.$emit('Alert::show', 'Announcement updated!')
+
+            let parent = this
+
+            setTimeout(function () {
+              parent.$root.$emit('Alert::hide', '')
+              parent.loading = false
+            }, 3000)
+          })
+        }
       } catch (err) {
         console.log(err)
       }
