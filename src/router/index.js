@@ -55,6 +55,12 @@ const router = new Router({
       path: '/announcement-details',
       meta: { title: 'Announcement details' },
       component: () => import(/* webpackChunkName: "announcementdetails" */ '../views/backoffice/message/MessageDetails')
+    },
+    {
+      name: 'deleted-announcements',
+      path: '/deleted-announcements',
+      meta: { title: 'Deleted announcement' },
+      component: () => import(/* webpackChunkName: "deletedannouncements" */ '../views/backoffice/message/DeletedMessages')
     }
   ]
 })
@@ -68,7 +74,8 @@ router.beforeEach((to, from, next) => {
       to.name === 'announcement-list' ||
       to.name === 'announcement-create' ||
       to.name === 'announcement-edit' ||
-      to.name === 'announcement-details'
+      to.name === 'announcement-details' ||
+      to.name === 'deleted-announcements'
     )
   ) {
     next({ name: 'login' })
