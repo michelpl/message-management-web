@@ -25,7 +25,7 @@
       <input type="date" class="form-control" id="expirationdate" placeholder="Expiration date" required v-model="expirationdate" :disabled="loading">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" :disabled="loading">Submit</button>
 </form>
 </template>
 
@@ -95,7 +95,7 @@ export default {
         let messageId = this.messageId ? this.messageId : ''
         const auth = 'Bearer ' + token
 
-        let url = 'http://desafio.localhost/api/V1/message/' + messageId
+        let url = 'http://desafio.localhost/api/V1/message'
         let data = {
           'subject': subject,
           'content': content,
@@ -104,18 +104,19 @@ export default {
           'status': status,
           'user_id': userId
         }
+        let headers = {
+          headers: {
+            Authorization: auth
+          }
+        }
 
         if (messageId) {
           this.$http.put(
-            url,
-            data, {
-              headers: {
-                Authorization: auth
-              }
-            }
+            url + '/' + messageId,
+            data,
+            headers
           ).then(function (data) {
-            this.$root.$emit('Alert::show', 'Announcement created!')
-
+            this.$root.$emit('Alert::show', 'Announcement updated!')
             let parent = this
 
             setTimeout(function () {
@@ -127,19 +128,19 @@ export default {
           console.log('aqui')
           this.$http.post(
             url,
-            data, {
-              headers: {
-                Authorization: auth
-              }
-            }
+            data,
+            headers
           ).then(function (data) {
-            this.$root.$emit('Alert::show', 'Announcement updated!')
-
+            this.$root.$emit('Alert::show', 'Announcement created!')
             let parent = this
 
             setTimeout(function () {
               parent.$root.$emit('Alert::hide', '')
               parent.loading = false
+              parent.subject = ''
+              parent.content = ''
+              parent.startdate = ''
+              parent.expirationdate = ''
             }, 3000)
           })
         }
