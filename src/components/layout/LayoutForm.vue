@@ -1,13 +1,19 @@
 <template>
-<form @submit.prevent="createAnnouncement()">
+<form @submit.prevent="submitMessage()">
   <div class="form-group">
     <label for="subject">Subject</label>
     <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" maxlength="255" required v-model="subject" :disabled="loading">
-    {{subject}}
   </div>
   <div class="form-group">
     <label for="content">Content</label>
     <textarea class="form-control" id="content" rows="3" maxlength="500" required v-model="content" :disabled="loading"></textarea>
+  </div>
+  <div class="form-group" v-if="messageId">
+    <label for="status">Message Status</label>
+    <select class="form-control" id="status" v-model="status" :disabled="loading">
+      <option>ACTIVE</option>
+      <option>INACTIVE</option>
+    </select>
   </div>
   <div class="row">
     <div class="form-group col-6">
@@ -26,38 +32,76 @@
 <script>
 export default {
   name: 'LayoutForm',
+  props: ['messageId'],
   data () {
     return {
       loading: false,
       subject: '',
       content: '',
       startdate: '',
-      expirationdate: ''
+      expirationdate: '',
+      status: 'ACTIVE'
+    }
+  },
+  mounted () {
+    console.log('messageId', this.messageId)
+    if (this.messageId) {
+      this.loadMessage(this.messageId)
     }
   },
   methods: {
-    createAnnouncement: function () {
-      const {
-        subject,
-        content,
-        startdate,
-        expirationdate
-      } = this
-
+    loadMessage: function (messageId) {
       try {
         this.loading = true
 
         let token = localStorage.getItem('mm_token')
         const auth = 'Bearer ' + token
 
-        this.$http.post(
-          'http://desafio.localhost/api/V1/message',
+        this.$http.get(
+          'http://desafio.localhost/api/V1/message/' + messageId,
+          {
+            headers: {
+              Authorization: auth
+            }
+          }
+        ).then(function (data) {
+          console.log(data)
+
+          this.subject = data.body.subject
+          this.content = data.body.content
+          this.startdate = data.body.start_date
+          this.expirationdate = data.body.expiration_date
+
+          this.loading = false
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    submitMessage: function () {
+      const {
+        subject,
+        content,
+        startdate,
+        expirationdate,
+        status
+      } = this
+
+      try {
+        this.loading = true
+
+        let token = localStorage.getItem('mm_token')
+        let messageId = this.messageId ? this.messageId : ''
+        const auth = 'Bearer ' + token
+
+        this.$http.put(
+          'http://desafio.localhost/api/V1/message/' + messageId,
           {
             'subject': subject,
             'content': content,
             'start_date': startdate,
             'expiration_date': expirationdate,
-            'status': 'ACTIVE',
+            'status': status,
             'user_id': 3
           }, {
             headers: {
@@ -65,12 +109,7 @@ export default {
             }
           }
         ).then(function (data) {
-          this.subject = ''
-          this.content = ''
-          this.startdate = ''
-          this.expirationdate = ''
-
-          this.$root.$emit('Alert::show', 'Announcement created!')
+          this.$root.$emit('Alert::show', 'Announcement updated!')
 
           let parent = this
 

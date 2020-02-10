@@ -7,7 +7,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Announcements List</h1>
+            <h1 class="h2">Announcement List</h1>
           </div>
           <h2>Announcements</h2>
           <div class="table-responsive">
@@ -28,9 +28,7 @@
                 <td>{{ message.expiration_date }}</td>
                 <td>{{ message.subject }}</td>
                 <td>
-                  <router-link to="/home">View</router-link>
-                  <router-link to="/">Edit</router-link>
-                  <router-link to="/">Delete</router-link>
+                  <layout-edit-message :messageId="message.id"></layout-edit-message>
                 </td>
               </tr>
               </tbody>
@@ -52,11 +50,13 @@
 </template>
 
 <script>
-import LayoutNavigation from '../../components/layout/LayoutNavigation'
-import LayoutNavbar from '../../components/layout/LayoutNavbar'
+import LayoutNavigation from '../../../components/layout/LayoutNavigation'
+import LayoutNavbar from '../../../components/layout/LayoutNavbar'
+import LayoutEditMessage from '../../../components/layout/message/LayoutEditMessage'
+
 export default {
   name: 'AnnouncementList',
-  components: { LayoutNavbar, LayoutNavigation },
+  components: { LayoutNavbar, LayoutNavigation, LayoutEditMessage },
   data () {
     return {
       messageList: [],
