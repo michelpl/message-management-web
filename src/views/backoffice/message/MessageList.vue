@@ -117,6 +117,10 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    formatDate (date) {
+      let newDate = new Date(date)
+      return newDate.getDate() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear()
     }
   }
 }

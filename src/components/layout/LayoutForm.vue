@@ -68,6 +68,7 @@ export default {
           this.content = data.body.content
           this.startdate = data.body.start_date
           this.expirationdate = data.body.expiration_date
+          this.status = data.body.status
 
           this.loading = false
         })
