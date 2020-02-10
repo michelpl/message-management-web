@@ -59,7 +59,7 @@ const router = new Router({
     {
       name: 'deleted-announcements',
       path: '/deleted-announcements',
-      meta: { title: 'Deleted announcement' },
+      meta: { title: 'Deleted announcements' },
       component: () => import(/* webpackChunkName: "deletedannouncements" */ '../views/backoffice/message/DeletedMessages')
     }
   ]
