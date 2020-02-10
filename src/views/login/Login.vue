@@ -34,7 +34,10 @@
           </template>
         </button>
         <p></p>
-        <router-link to="/"><i class="fas fa-long-arrow-alt-left"></i> Back</router-link>
+        <div class="wrap">
+          <router-link to="/"><i class="fas fa-long-arrow-alt-left"></i> Back</router-link>
+          <router-link to="/register" class="-align-right"><i class="fas fa-user ri"></i> Register</router-link>
+        </div>
       </div>
     </div>
   </form>
@@ -93,6 +96,10 @@ export default {
     .card {
       width: 30%;
       color: var(--darker);
+    }
+    .wrap {
+      display: flex;
+      justify-content: space-between;
     }
   }
 </style>

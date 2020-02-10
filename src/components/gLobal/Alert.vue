@@ -1,5 +1,5 @@
 <template>
-  <div class="alert alert-success" role="alert" v-if="visible">
+  <div class="alert alert-info" role="alert" v-if="visible">
     {{message}} <i class="fas fa-times" @click="closeAlert()"></i>
   </div>
 </template>

@@ -6,6 +6,7 @@ $featured-dark: #273040 !important;
 $light: #cfcfcf!important;
 $lighter: #fff!important;
 $gray: #c1c1c1!important;
+$red: #d20002 !important;
 
 :root {
   --dark: #{$dark};
@@ -15,5 +16,6 @@ $gray: #c1c1c1!important;
   --featured-dark: #{$featured-dark};
   --light: #{$light};
   --lighter: #{$lighter};
-  --gray: #{$gray}
+  --gray: #{$gray};
+  --red: #{$red};
 }
