@@ -44,7 +44,6 @@ export default {
     }
   },
   mounted () {
-    console.log('messageId', this.messageId)
     if (this.messageId) {
       this.loadMessage(this.messageId)
     }
@@ -65,8 +64,6 @@ export default {
             }
           }
         ).then(function (data) {
-          console.log(data)
-
           this.subject = data.body.subject
           this.content = data.body.content
           this.startdate = data.body.start_date
@@ -125,7 +122,6 @@ export default {
             }, 3000)
           })
         } else {
-          console.log('aqui')
           this.$http.post(
             url,
             data,
