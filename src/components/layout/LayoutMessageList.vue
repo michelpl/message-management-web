@@ -1,5 +1,7 @@
 <template>
   <div>
+    <alert></alert>
+    <modal></modal>
     <h2>Announcements</h2>
     <div class="table-responsive">
       <table class="table table-striped table-sm">
@@ -43,10 +45,12 @@
 import LayoutEditMessage from './buttons/LayoutEditMessage'
 import LayoutMessageDetails from './buttons/LayoutMessageDetails'
 import LayoutDeleteMessage from './buttons/LayoutDeleteMessage'
+import Modal from '../../components/gLobal/Modal'
+import Alert from '../gLobal/Alert'
 
 export default {
   name: 'LayoutMessageList',
-  components: { LayoutEditMessage, LayoutMessageDetails, LayoutDeleteMessage },
+  components: { Alert, LayoutEditMessage, LayoutMessageDetails, LayoutDeleteMessage, Modal },
   data () {
     return {
       messageList: [],
@@ -90,7 +94,7 @@ export default {
             Authorization: auth
           }
         }).then(function (data) {
-          this.messageList = data.body.data
+          this.messageList = this.filter(data.body.data)
           this.nextPage = data.body.next_page_url
           this.previousPage = data.body.prev_page_url
           this.pageCount = data.body.last_page
@@ -103,6 +107,18 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    filter (data) {
+      let messageList = []
+      let count = data.length
+      for (let i = 0; i < count; i++) {
+        data[i]['start_date'] = this.formatDate(data[i]['start_date'])
+        data[i]['expiration_date'] = this.formatDate(data[i]['expiration_date'])
+        data[i]['updated_at'] = this.formatDate(data[i]['updated_at'])
+        messageList[i] = data[i]
+      }
+
+      return messageList
     },
     formatDate (date) {
       let newDate = new Date(date)

@@ -12,8 +12,47 @@ export default {
     return {
     }
   },
+  created () {
+    this.$root.$on('Delete::confirm', (data) => {
+      this.delete(data.modalItemId)
+    }
+    )
+  },
   methods: {
-    deleteMessage () {
+    deleteMessage: function () {
+      let modalArgs = {
+        modalTitle: 'Delete',
+        modalMessage: 'Are you sure you want to delete this announcement?',
+        modalCallbackEvent: 'Delete:confirm',
+        modalItemId: this.messageId
+      }
+
+      this.$root.$emit('Modal::show', modalArgs)
+    },
+    delete: function (messageId) {
+      console.log('entrou')
+      try {
+        let token = localStorage.getItem('mm_token')
+        const auth = 'Bearer ' + token
+
+        let url = 'http://desafio.localhost/api/V1/message'
+        let headers = {
+          headers: {
+            Authorization: auth
+          }
+        }
+
+        if (messageId) {
+          this.$http.delete(
+            url + '/' + messageId,
+            headers
+          ).then(function (data) {
+            this.$root.$emit('Alert::show', 'Announcement deleted!')
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
