@@ -7,6 +7,7 @@ $light: #cfcfcf!important;
 $lighter: #fff!important;
 $gray: #c1c1c1!important;
 $red: #d20002 !important;
+$danger: #b4372b !important;
 
 :root {
   --dark: #{$dark};
@@ -18,4 +19,5 @@ $red: #d20002 !important;
   --lighter: #{$lighter};
   --gray: #{$gray};
   --red: #{$red};
+  --danger: #{$danger}
 }

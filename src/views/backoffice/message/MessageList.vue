@@ -28,7 +28,9 @@
                 <td>{{ message.expiration_date }}</td>
                 <td>{{ message.subject }}</td>
                 <td>
-                  <layout-edit-message :messageId="message.id"></layout-edit-message>
+                  <layout-message-details :messageId="message.id"></layout-message-details> |
+                  <layout-edit-message :messageId="message.id"></layout-edit-message> |
+                  <layout-delete-message :messageId="message.id"></layout-delete-message>
                 </td>
               </tr>
               </tbody>
@@ -52,11 +54,13 @@
 <script>
 import LayoutNavigation from '../../../components/layout/LayoutNavigation'
 import LayoutNavbar from '../../../components/layout/LayoutNavbar'
-import LayoutEditMessage from '../../../components/layout/message/LayoutEditMessage'
+import LayoutEditMessage from '../../../components/layout/buttons/LayoutEditMessage'
+import LayoutMessageDetails from '../../../components/layout/buttons/LayoutMessageDetails'
+import LayoutDeleteMessage from '../../../components/layout/buttons/LayoutDeleteMessage'
 
 export default {
   name: 'AnnouncementList',
-  components: { LayoutNavbar, LayoutNavigation, LayoutEditMessage },
+  components: { LayoutNavbar, LayoutNavigation, LayoutEditMessage, LayoutMessageDetails, LayoutDeleteMessage },
   data () {
     return {
       messageList: [],

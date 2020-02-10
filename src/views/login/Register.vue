@@ -105,7 +105,6 @@ export default {
             }
           }
         ).then(function (data) {
-          console.log(data)
           this.$root.$emit('Alert::show', 'User registered successfully!')
           let parent = this
 
