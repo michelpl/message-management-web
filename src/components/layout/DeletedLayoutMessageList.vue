@@ -50,13 +50,13 @@ export default {
   },
   mounted () {
     let userId = localStorage.getItem('mm_user_id')
-    this.loadPage('http://desafio.localhost/api/V1/message/user/' + userId + '/deleted')
+    this.loadPage('http://localhost:8000/api/V1/message/user/' + userId + '/deleted')
   },
   methods: {
     reload (pageId) {
       if (pageId) {
         let userId = localStorage.getItem('mm_user_id')
-        let page = 'http://desafio.localhost/api/V1/message/user/' + userId + '/deleted?page=' + pageId
+        let page = 'http://localhost:8000/api/V1/message/user/' + userId + '/deleted?page=' + pageId
         this.loadPage(page)
       }
     },

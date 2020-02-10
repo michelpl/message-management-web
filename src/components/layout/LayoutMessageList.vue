@@ -63,13 +63,13 @@ export default {
   },
   mounted () {
     let userId = localStorage.getItem('mm_user_id')
-    this.loadPage('http://desafio.localhost/api/V1/message/user/' + userId)
+    this.loadPage('http://localhost:8000/api/V1/message/user/' + userId)
   },
   methods: {
     reload (pageId) {
       if (pageId) {
         let userId = localStorage.getItem('mm_user_id')
-        let page = 'http://desafio.localhost/api/V1/message/user/' + userId + '?page=' + pageId
+        let page = 'http://localhost:8000/api/V1/message/user/' + userId + '?page=' + pageId
         this.loadPage(page)
       }
     },

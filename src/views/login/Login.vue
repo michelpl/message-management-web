@@ -64,7 +64,7 @@ export default {
       try {
         this.$root.$emit('Spinner::show')
         this.$http.post(
-          'http://desafio.localhost/api/V1/login',
+          'http://localhost:8000/api/V1/login',
           {
             'user': email,
             'password': password

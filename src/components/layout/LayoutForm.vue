@@ -57,7 +57,7 @@ export default {
         const auth = 'Bearer ' + token
 
         this.$http.get(
-          'http://desafio.localhost/api/V1/message/' + messageId,
+          'http://localhost:8000/api/V1/message/' + messageId,
           {
             headers: {
               Authorization: auth
@@ -93,7 +93,7 @@ export default {
         let messageId = this.messageId ? this.messageId : ''
         const auth = 'Bearer ' + token
 
-        let url = 'http://desafio.localhost/api/V1/message'
+        let url = 'http://localhost:8000/api/V1/message'
         let data = {
           'subject': subject,
           'content': content,

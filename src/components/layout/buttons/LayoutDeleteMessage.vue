@@ -34,7 +34,7 @@ export default {
         let token = localStorage.getItem('mm_token')
         const auth = 'Bearer ' + token
 
-        let url = 'http://desafio.localhost/api/V1/message'
+        let url = 'http://localhost:8000/api/V1/message'
         let headers = {
           headers: {
             Authorization: auth

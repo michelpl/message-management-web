@@ -92,7 +92,7 @@ export default {
         this.invalidPassword = ''
         this.loading = true
         this.$http.post(
-          'http://desafio.localhost/api/V1/register',
+          'http://localhost:8000/api/V1/register',
           {
             'email': email,
             'name': name,
